@@ -35,6 +35,15 @@ def create_text_form(user:User, context:str):
 def create_email_info(user:User, msg:MIMEText):
     return TextEmailInfo(user,msg)
 
+# 사용자 리스트 -> TextEmailInfo 리스트 생성
+def create_email_infos(users:list[User]):
+    emailInfos : list[TextEmailInfo] = []
+    for user in users:
+        msg = create_text_form(user, "test TEXT 입니다.")
+        emailInfo = create_email_info(user, msg)
+        emailInfos.append(emailInfo)
+    return emailInfos
+
 # smtp를 통한 이메일 전송
 def send_email(email_infos:list[TextEmailInfo]):
   try:
